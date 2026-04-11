@@ -771,3 +771,164 @@ def seven_char_template(opcode: str = "NOP",
             block.instructions.append(Instruction("NOP", [ch]))
 
     return block
+
+
+class PoetryLayoutParser:
+    """詩體佈局解析器 — Parse programs formatted as Classical Chinese poetry.
+
+    Classical Chinese programs are poems. The parser recognizes:
+      五言詩 (5-char poem): 5 characters per line, each line = 1 instruction
+      七言詩 (7-char poem): 7 characters per line, richer instructions
+
+    The parser determines poem type from line length, extracts tonal patterns
+    for parallelism, and produces PoeticBlocks ready for compilation.
+
+    詩即程 — the poem IS the program.
+    """
+
+    @staticmethod
+    def detect_form(line: str) -> PoeticForm:
+        """Detect the poetic form of a line based on character count.
+
+        Args:
+            line: A line of Classical Chinese text.
+
+        Returns:
+            PoeticForm.FIVE_CHAR or PoeticForm.SEVEN_CHAR.
+        """
+        stripped = line.strip().rstrip("。，！？、；：""''")
+        char_count = len(stripped)
+        if char_count == 7:
+            return PoeticForm.SEVEN_CHAR
+        return PoeticForm.FIVE_CHAR
+
+    @staticmethod
+    def parse_line(line: str, position: str = "") -> PoeticBlock:
+        """Parse a single line of poetry as a program instruction.
+
+        Detects the form (5-char or 7-char), classifies tones, and
+        creates a PoeticBlock with instructions.
+
+        Args:
+            line: A line of Classical Chinese text.
+            position: Optional position label (起/承/轉/合).
+
+        Returns:
+            A PoeticBlock ready for compilation.
+        """
+        form = PoetryLayoutParser.detect_form(line)
+        compiler = PoemCompiler()
+
+        if form == PoeticForm.SEVEN_CHAR:
+            block = compiler.compile_seven_char(line)
+        else:
+            block = compiler.compile_five_char(line)
+
+        if position:
+            block.position = position
+        return block
+
+    @staticmethod
+    def parse_quatrain(opening: str, continuing: str, turning: str, concluding: str) -> list[PoeticBlock]:
+        """Parse a 絕句 (quatrain) as a complete 4-line program.
+
+        The four positions map to program phases:
+          起句 (Opening)    → Entry / initialization
+          承句 (Continuing) → Setup / data loading
+          轉句 (Turning)    → Core computation
+          合句 (Concluding) → Exit / result output
+
+        Args:
+            opening: First line (起句).
+            continuing: Second line (承句).
+            turning: Third line (轉句).
+            concluding: Fourth line (合句).
+
+        Returns:
+            List of 4 PoeticBlocks.
+        """
+        positions = ["起", "承", "轉", "合"]
+        lines = [opening, continuing, turning, concluding]
+        blocks = []
+        compiler = PoemCompiler()
+        for line, pos in zip(lines, positions):
+            form = PoetryLayoutParser.detect_form(line)
+            if form == PoeticForm.SEVEN_CHAR:
+                block = compiler.compile_seven_char(line)
+            else:
+                block = compiler.compile_five_char(line)
+            block.position = pos
+            blocks.append(block)
+        return blocks
+
+    @staticmethod
+    def parse_regulated(lines: list[str]) -> list[PoeticBlock]:
+        """Parse a 律詩 (regulated verse) — an 8-line program.
+
+        Lines 3–6 form parallel couplets (對仗) — the earliest SIMD parallelism
+        in human intellectual history, encoded in poetic form over 1500 years ago.
+
+        Args:
+            lines: 8 lines of poetry.
+
+        Returns:
+            List of 8 PoeticBlocks.
+        """
+        if len(lines) != 8:
+            raise ValueError(f"律詩 requires exactly 8 lines, got {len(lines)}")
+        blocks = []
+        couplet_names = ["首聯上", "首聯下", "頷聯上", "頷聯下",
+                         "頸聯上", "頸聯下", "尾聯上", "尾聯下"]
+        compiler = PoemCompiler()
+        for line, name in zip(lines, couplet_names):
+            form = PoetryLayoutParser.detect_form(line)
+            if form == PoeticForm.SEVEN_CHAR:
+                block = compiler.compile_seven_char(line)
+            else:
+                block = compiler.compile_five_char(line)
+            block.position = name
+            blocks.append(block)
+        return blocks
+
+    @staticmethod
+    def parse_poem(source: str) -> list[PoeticBlock]:
+        """Parse a complete poem as a program.
+
+        Detects the poem type (quatrain vs. regulated verse) from line count
+        and delegates to the appropriate parser.
+
+        Args:
+            source: Multi-line Classical Chinese poem text.
+
+        Returns:
+            List of PoeticBlocks.
+        """
+        lines = [l.strip() for l in source.strip().splitlines() if l.strip() and not l.strip().startswith("#")]
+        if len(lines) == 4:
+            return PoetryLayoutParser.parse_quatrain(*lines)
+        elif len(lines) == 8:
+            return PoetryLayoutParser.parse_regulated(lines)
+        else:
+            # Default: parse each line individually
+            compiler = PoemCompiler()
+            blocks = []
+            for line in lines:
+                form = PoetryLayoutParser.detect_form(line)
+                if form == PoeticForm.SEVEN_CHAR:
+                    block = compiler.compile_seven_char(line)
+                else:
+                    block = compiler.compile_five_char(line)
+                blocks.append(block)
+            return blocks
+
+    @staticmethod
+    def format_program(blocks: list[PoeticBlock]) -> str:
+        """Format parsed poetic blocks as a readable program analysis.
+
+        Returns:
+        Formatted string suitable for display.
+        """
+        compiler = PoemCompiler()
+        for block in blocks:
+            compiler._blocks.append(block)
+        return compiler.dump_analysis()
