@@ -1,0 +1,2 @@
+[console_scripts]
+flux-wen = flux_wen.cli:main

@@ -1,0 +1,57 @@
+# ═══════════════════════════════════════════════════════════════
+# confucian.ese — 儒家词库 / Confucian Vocabulary
+# ═══════════════════════════════════════════════════════════════
+#
+# 四书五经 as standard library.
+# The Five Constant Virtues (五常) as fundamental operations:
+#   仁 (Rén)  — Benevolence  → DISTRIBUTE (share resources)
+#   义 (Yì)   — Righteousness → VALIDATE (verify correctness)
+#   礼 (Lǐ)   — Ritual        → ORCHESTRATE (coordinate processes)
+#   智 (Zhì)  — Wisdom        → OPTIMIZE (find best solution)
+#   信 (Xìn)  — Trust         → VERIFY (ensure integrity)
+#
+# These map to core programming concepts:
+#   Distribution = parallelism / fan-out
+#   Validation = type checking / assertions
+#   Orchestration = workflow / sequencing
+#   Optimization = compilation / efficiency
+#   Verification = testing / integrity checks
+#
+# ═══════════════════════════════════════════════════════════════
+
+# ── Domain declaration ──────────────────────────────────────
+@domain: 儒 (confucian)
+@description: 四书五经标准词库 — 儒家概念映射为程序操作
+
+# ── Operations (五常 → 五运算) ─────────────────────────────
+仁 → DISTRIBUTE   # Benevolence: fan-out, distribute to all
+义 → VALIDATE     # Righteousness: assert, verify correctness
+礼 → ORCHESTRATE  # Ritual: sequence, coordinate workflow
+智 → OPTIMIZE     # Wisdom: find optimal solution
+信 → VERIFY       # Trust: cryptographic verification, integrity
+
+# ── Extended Confucian concepts ─────────────────────────────
+德 → INTEGRITY    # Virtue: system integrity
+道 → PRINCIPLE    # Way: architectural principle
+理 → LOGIC        # Reason: logical operation
+气 → ENERGY       # Qi: system resource / throughput
+阴阳 → BALANCE    # Yin-Yang: load balancing
+中庸 → MODERATE   # Golden Mean: rate limiting
+天人 → WHOLE      # Heaven-Human unity: system holistic view
+
+# ── Social hierarchy → process hierarchy ────────────────────
+君 → SUPERVISOR   # Ruler: supervisory process
+臣 → WORKER       # Minister: worker process
+民 → DATA         # People: data / payload
+邦 → NAMESPACE    # State: namespace / module
+
+# ── Learning → compilation ─────────────────────────────────
+学 → COMPILE      # Learning: compile / transform
+思 → ANALYZE      # Thinking: static analysis
+习 → EXECUTE      # Practice: runtime execution
+问 → ASK          # Inquiring: query external agent
+
+# ── Analects patterns ──────────────────────────────────────
+# 学而时习之 → COMPILE then EXECUTE on schedule
+# 温故而知新 → REPLAY history, DISCOVER new patterns
+# 三人行必有我师 → POLL 3 agents, SELECT best response

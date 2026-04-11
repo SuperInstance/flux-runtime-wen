@@ -1,0 +1,52 @@
+# ═══════════════════════════════════════════════════════════════
+# math.ese — 算学词库 / Mathematical Vocabulary
+# ═══════════════════════════════════════════════════════════════
+#
+# Classical Chinese mathematical operations.
+# These are the most fundamental — 4-character programs for math.
+#
+#   加三于四  → 7   (add three to four)
+#   三加四    → 7   (three add four — word-order variant)
+#   三乘四    → 12  (three multiply four)
+#   一至十合  → 55  (one to ten sum — Gauss's formula)
+#   以 R0 为七 → R0 = 7  (take register zero as seven)
+#
+# ═══════════════════════════════════════════════════════════════
+
+# ── Domain declaration ──────────────────────────────────────
+@domain: 算 (mathematics)
+@description: 算学词库 — 文言数学运算
+
+# ── Arithmetic operators ────────────────────────────────────
+加 → IADD         # Add
+减 → ISUB         # Subtract
+乘 → IMUL         # Multiply
+除 → IDIV         # Divide
+余 → IMOD         # Modulo
+幂 → IEXP         # Power
+根 → IROOT        # Square root
+
+# ── Comparison operators ────────────────────────────────────
+等 → IEQ          # Equal
+大于 → IGT        # Greater than
+小于 → ILT        # Less than
+非零 → INZ        # Not zero
+
+# ── Accumulation ────────────────────────────────────────────
+合 → ISUM         # Sum / combine
+积 → IPROD        # Product
+至 → RANGE        # Range (to)
+遍 → EACH         # For each / iterate
+
+# ── Special values ──────────────────────────────────────────
+零 → 0            # Zero
+一 → 1            # One (also: true)
+无 → NULL         # Nothing / null
+全 → ALL          # Everything / all
+极 → MAX          # Ultimate / maximum
+
+# ── Classical patterns ─────────────────────────────────────
+# 天元术 → ALGEBRA  (Song dynasty polynomial method)
+# 方程    → EQUATION (Nine Chapters method)
+# 勾股    → PYTHAGORAS (right triangle)
+# 割圆    → PI_APPROXIMATION (Liu Hui's circle method)

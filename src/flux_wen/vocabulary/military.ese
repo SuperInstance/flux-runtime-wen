@@ -1,0 +1,49 @@
+# ═══════════════════════════════════════════════════════════════
+# military.ese — 兵法词库 / Military Strategy Vocabulary
+# ═══════════════════════════════════════════════════════════════
+#
+# 孙子兵法 (Sun Tzu's Art of War) as strategy patterns.
+# Military operations map to system operations:
+#
+#   攻 (Gōng)  — Attack       → SEND request / push data
+#   守 (Shǒu)  — Defend       → RECEIVE / buffer / protect
+#   退 (Tuì)   — Withdraw     → BACKOFF / retry with delay
+#   进 (Jìn)   — Advance      → PROCEED / next phase
+#   伏 (Fú)    — Ambush       → LAZY_EVAL / on-demand compute
+#   围 (Wéi)   — Surround     → CIRCLE / round-robin
+#   分 (Fēn)   — Divide       → SPLIT / partition
+#   合 (Hé)    — Unite        → MERGE / aggregate
+#
+# ═══════════════════════════════════════════════════════════════
+
+# ── Domain declaration ──────────────────────────────────────
+@domain: 兵 (military)
+@description: 孙子兵法词库 — 军事策略映射为系统操作
+
+# ── Core operations ─────────────────────────────────────────
+攻 → ATTACK       # Attack: send request, push forward
+守 → DEFEND       # Defend: buffer, protect, receive
+退 → WITHDRAW     # Withdraw: backoff, retry later
+进 → ADVANCE      # Advance: proceed to next phase
+伏 → AMBUSH       # Ambush: lazy evaluation, deferred compute
+围 → SURROUND     # Surround: round-robin, wrap-around
+分 → SPLIT        # Divide: partition, shard data
+合 → MERGE        # Unite: aggregate, combine results
+
+# ── Terrain → infrastructure ────────────────────────────────
+山 → MOUNTAIN     # Mountain: high-latency path
+水 → WATER        # Water: streaming data
+林 → FOREST       # Forest: dense, complex topology
+火 → FIRE         # Fire: emergency shutdown / purge
+
+# ── Force composition ──────────────────────────────────────
+正 → DIRECT       # Direct force: synchronous path
+奇 → INDIRECT     # Indirect force: asynchronous path
+虚 → VACANT       # Empty: available capacity
+实 → FULL         # Full: at capacity
+
+# ── Sun Tzu patterns ────────────────────────────────────────
+# 知己知彼 → SELF_PROFILE + OPPONENT_PROFILE → DECIDE
+# 兵者诡道也 → ALL_COMMUNICATION_IS_ENCRYPTED
+# 不战而屈人之兵 → RESOLVE_WITHOUT_COMPUTE (cache hit)
+# 出其不意 → SURPRISE_DISPATCH (async callback)

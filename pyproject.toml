@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flux-runtime-wen"
+version = "0.1.0"
+description = "流星 — 文言编程 (FLUX: Classical Chinese Programming Runtime)"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+keywords = ["flux", "wenyanwen", "classical-chinese", "nlp", "programming-language"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Interpreters",
+    "Natural Language :: Chinese (Classical)",
+]
+
+[project.scripts]
+flux-wen = "flux_wen.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
