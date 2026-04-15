@@ -5,6 +5,9 @@
 > 零语法，纯概念，四字成程。
 > No grammar. Pure concept. Four characters suffice.
 
+> **This is the Classical Chinese (文言文) localization of [flux-runtime](https://github.com/SuperInstance/flux-runtime).**
+> FLUX-wen is part of the FLUX internationalization fleet — a Classical Chinese-first NL runtime for the FLUX universal bytecode VM, leveraging zero-inflection grammar, context-defined semantics, and four-character program expressions.
+
 ---
 
 ## 何为文言编程？
@@ -175,6 +178,27 @@ flux-runtime-wen/
 
 ---
 
+## Build & Test
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd flux-runtime-wen
+
+# Install in editable mode with dev dependencies
+pip install -e ".[dev]"
+
+# Run the test suite
+pytest tests/ -v
+
+# Run via CLI
+flux-wen 啟
+```
+
 ## License
 
 MIT
+
+---
+
+<img src="callsign1.jpg" width="128" alt="callsign">
